@@ -14,7 +14,7 @@ class Abstract:
     title = "Abstract Title"
     abstract = "Abstract Text not available"
 
-    def __init__(self, title=None, authorList=None, abstract=None):
+    def __init__(self, title=None, author_list=None, abstract=None):
         self.title = title
-        self.authors = list(authorList)
+        self.authors = list(author_list)
         self.abstract = abstract

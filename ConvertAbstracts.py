@@ -1,5 +1,6 @@
 import os
 from GeneralModels import Abstract, Author
+from OutputModel import get_output_format
 
 abstractFolder = "Abstracts/"
 
@@ -26,4 +27,7 @@ for filename in os.listdir(abstractFolder):
 
         AllAbstracts.append(Abstract(title, authorList, abstractText))
 
-print(AllAbstracts)
+with open("all_abstracts.tex", 'w') as f:
+    for a in AllAbstracts:
+        print(get_output_format(a), file=f)
+        print(r"\\\\", file=f)

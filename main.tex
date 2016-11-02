@@ -5,6 +5,7 @@ pdftitle={Conference Schedule}]{hyperref} %References and hyperlinks
 \usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
 \usepackage{fixltx2e} %Removes in paragraph warnings
 \usepackage[utf8]{inputenc}
+\usepackage{standalone} % load only in the main file
 
 \newcommand{\RAuthor}[2]{}
 
@@ -14,6 +15,6 @@ pdftitle={Conference Schedule}]{hyperref} %References and hyperlinks
 #3
  }
 \begin{document}
-\RAbstract{Title}{Authors}{Some abstract }
+\input{all_abstracts}
 \end{document}
 
