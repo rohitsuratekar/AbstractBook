@@ -1,0 +1,19 @@
+\documentclass{book}
+\usepackage[pdftex,
+pdfauthor={Rohit Suratekar},
+pdftitle={Conference Schedule}]{hyperref} %References and hyperlinks
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+\usepackage{fixltx2e} %Removes in paragraph warnings
+\usepackage[utf8]{inputenc}
+
+\newcommand{\RAuthor}[2]{}
+
+\newcommand{\RAbstract}[3]{%
+#1 %
+\\ {\small \textit{#2}}\\%
+#3
+ }
+\begin{document}
+\RAbstract{Title}{Authors}{Some abstract }
+\end{document}
+
