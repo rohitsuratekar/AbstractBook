@@ -19,11 +19,18 @@ for filename in os.listdir(abstractFolder):
             for i in objects[1:len(objects) - 1]:
                 authObject = list(filter(None, i.replace("]", "").split("[")))  # Get all non empty objects
                 if len(authObject) > 1:  # If author affiliation is given
-                    authorList.append(Author(authObject[0].strip(), authObject[1].strip()))
+                    # If more than one affiliation
+                    all_institutes = []
+                    if len(authObject) > 2:
+                        for institute in authObject[1:]:
+                            all_institutes.append(institute.strip())
+                    else:
+                        all_institutes.append(authObject[1].strip())
+                    authorList.append(Author(authObject[0].strip(), all_institutes))
                 else:  # If author affiliation is not given
-                    authorList.append(Author(authObject[0].strip(), "Not Available"))
+                    authorList.append(Author(authObject[0].strip(), ["Not Available"]))
         else:  # If no author is given
-            authorList.append(Author("Unknown", "Not Available"))
+            authorList.append(Author("Unknown", ["Not Available"]))
 
         AllAbstracts.append(Abstract(title, authorList, abstractText))
 

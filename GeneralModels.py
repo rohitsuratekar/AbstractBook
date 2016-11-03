@@ -1,11 +1,11 @@
 class Author:
     """Author name and its affiliation"""
     name = "Author Name"
-    affiliation = "Unknown"
+    affiliation = ["Unknown"]
 
     def __init__(self, name=None, affiliation=None):
         self.name = name
-        self.affiliation = affiliation
+        self.affiliation = list(affiliation)
 
 
 class Abstract:

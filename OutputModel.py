@@ -16,6 +16,7 @@ bq : \quad (before string)
 bqq: \qquad (before string)
 in : \indent
 se : \section{}
+ts : \textsuperscript{}
 
 To use new line after text use "n" at the end
 To use new lines before text use "n" at the start
@@ -36,21 +37,39 @@ def get_output_format(abstract):
     author_list = []
     institute_name_list = []
     for author in abstract.authors:
-        if author.affiliation.strip() not in institute_name_list:
-            institute_name_list.append(author.affiliation.strip())
+        current_author_insti = []
+        for institute in author.affiliation:
+            if institute not in institute_name_list:
+                institute_name_list.append(institute.strip())
+                current_author_insti.append(institute_name_list.index(institute.strip()))
+            else:
+                current_author_insti.append(institute_name_list.index(institute.strip()))
 
-        author_list.append(AuthorNames(author.name, institute_name_list.index(author.affiliation.strip())))
+        author_list.append(AuthorNames(author.name, current_author_insti))
 
     author_string = ""
+    # +1 is added to start numbering from 1
     for auth in author_list[:-1]:
-        author_string = author_string + auth.name + r"\textsuperscript{" + str(auth.index) + "}, "
-    author_string = author_string + author_list[-1].name + r"\textsuperscript{" + str(author_list[-1].index) + "}"
+        author_insti_list = ""
+        for s in auth.indexes[:-1]:
+            author_insti_list = author_insti_list + str(s + 1) + ","
+
+        author_insti_list += str(auth.indexes[-1] + 1)
+        author_string = author_string + auth.name + get["ts"](author_insti_list) + ", "
+
+    # For last author
+    author_insti_list = ""
+    for s in author_list[-1].indexes[:-1]:
+        author_insti_list = author_insti_list + str(s + 1) + ","
+
+    author_insti_list += str(author_list[-1].indexes[-1] + 1)
+    author_string = author_string + author_list[-1].name + get["ts"](author_insti_list)
 
     institute_string = ""
     for i in range(len(institute_name_list) - 1):
-        institute_string = institute_string + r"\textsuperscript{" + str(i) + "} " + institute_name_list[i] + r"\\"
+        institute_string = institute_string + get["ts"](str(i + 1)) + institute_name_list[i] + r"\\"
 
-    institute_string = institute_string + r"\textsuperscript{" + str(len(institute_name_list) - 1) + "} " + \
+    institute_string = institute_string + get["ts"](str(len(institute_name_list))) + \
                        institute_name_list[-1]
 
     title_string = abstract.title
@@ -71,11 +90,11 @@ class AuthorNames:
     """ Simple object to represent author and its superscript
     """
     name = "Author Name"
-    index = 0
+    indexes = [0]
 
-    def __init__(self, name=None, index=None):
+    def __init__(self, name=None, indexes=None):
         self.name = name
-        self.index = index
+        self.indexes = list(indexes)
 
 
 def bold(text):
@@ -146,6 +165,10 @@ def section(text):
     return r"\section{%s}" % text
 
 
+def superscript(text):
+    return r"\textsuperscript{%s}" % text
+
+
 get = {
     "b": bold,
     "i": italics,
@@ -163,5 +186,6 @@ get = {
     "qq": extra_tab_after,
     "bqq": extra_tab_before,
     "in": indent,
-    "se": section
+    "se": section,
+    "ts": superscript
 }
