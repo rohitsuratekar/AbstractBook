@@ -15,6 +15,7 @@ qq: \qquad (after string)
 bq : \quad (before string)
 bqq: \qquad (before string)
 in : \indent
+se : \section{}
 
 To use new line after text use "n" at the end
 To use new lines before text use "n" at the start
@@ -22,8 +23,8 @@ Use indent ("in") at the start of line
 
 """
 
-title_attributes = ["b", "n"]
-author_attributes = ["s", "n"]
+title_attributes = ["se"]
+author_attributes = ["n"]
 affiliation_attributes = ["sc", "i", "n", "n"]
 abstract_attribute = ["in", "n"]
 
@@ -141,6 +142,10 @@ def indent(text):
     return r"\indent %s " % text
 
 
+def section(text):
+    return r"\section{%s}" % text
+
+
 get = {
     "b": bold,
     "i": italics,
@@ -157,5 +162,6 @@ get = {
     "bq": tab_before,
     "qq": extra_tab_after,
     "bqq": extra_tab_before,
-    "in": indent
+    "in": indent,
+    "se": section
 }
