@@ -12,8 +12,8 @@ for filename in os.listdir(abstractFolder):
         data = myFile.read().replace('\n', '').replace("}", "")
         objects = list(filter(None, data.split("{")))  # Get all non empty objects
         # File should at least contains title and abstract
-        title = objects[0]
-        abstractText = objects[len(objects) - 1]
+        title = objects[0].replace("&", "\&")
+        abstractText = objects[len(objects) - 1].replace("&", "\&")
         authorList = []
         if len(objects) > 2:  # If at least 1 author is given
             for i in objects[1:len(objects) - 1]:
@@ -23,9 +23,9 @@ for filename in os.listdir(abstractFolder):
                     all_institutes = []
                     if len(authObject) > 2:
                         for institute in authObject[1:]:
-                            all_institutes.append(institute.strip())
+                            all_institutes.append(institute.strip().replace("&", "\&"))
                     else:
-                        all_institutes.append(authObject[1].strip())
+                        all_institutes.append(authObject[1].strip().replace("&", "\&"))
                     authorList.append(Author(authObject[0].strip(), all_institutes))
                 else:  # If author affiliation is not given
                     authorList.append(Author(authObject[0].strip(), ["Not Available"]))

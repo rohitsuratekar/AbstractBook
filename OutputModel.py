@@ -25,9 +25,9 @@ Use indent ("in") at the start of line
 """
 
 title_attributes = ["se"]
-author_attributes = ["n"]
-affiliation_attributes = ["sc", "i", "n", "n"]
-abstract_attribute = ["in", "n"]
+author_attributes = []
+affiliation_attributes = ["sc", "i"]
+abstract_attribute = ["in"]
 
 
 def get_output_format(abstract):
@@ -67,7 +67,7 @@ def get_output_format(abstract):
 
     institute_string = ""
     for i in range(len(institute_name_list) - 1):
-        institute_string = institute_string + get["ts"](str(i + 1)) + institute_name_list[i] + r"\\"
+        institute_string = institute_string + get["ts"](str(i + 1)) + institute_name_list[i] + r"\linebreak"
 
     institute_string = institute_string + get["ts"](str(len(institute_name_list))) + \
                        institute_name_list[-1]
@@ -83,7 +83,8 @@ def get_output_format(abstract):
     for ab in abstract_attribute:
         abstract_string = get[ab](abstract_string)
 
-    return r"%s%s%s%s" % (title_string, author_string, institute_string, abstract_string)
+    return r"%s \begin{center} %s \par %s \end{center} \sloppy %s" % (
+        title_string, author_string, institute_string, abstract_string)
 
 
 class AuthorNames:
