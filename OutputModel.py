@@ -28,6 +28,7 @@ title_attributes = ["se"]
 author_attributes = []
 affiliation_attributes = ["sc", "i"]
 abstract_attribute = ["in"]
+presenting_author_attribute = "b"
 
 
 def get_output_format(abstract):
@@ -55,15 +56,27 @@ def get_output_format(abstract):
             author_insti_list = author_insti_list + str(s + 1) + ","
 
         author_insti_list += str(auth.indexes[-1] + 1)
-        author_string = author_string + auth.name + get["ts"](author_insti_list) + ", "
+        # Bold if presenting author
+        if "*" in auth.name:
+            author_string = author_string + get[presenting_author_attribute](auth.name).replace("*", "") + get["ts"](
+                author_insti_list) + ", "
+        else:
+            author_string = author_string + auth.name + get["ts"](author_insti_list) + ", "
 
     # For last author
+
     author_insti_list = ""
     for s in author_list[-1].indexes[:-1]:
         author_insti_list = author_insti_list + str(s + 1) + ","
 
     author_insti_list += str(author_list[-1].indexes[-1] + 1)
-    author_string = author_string + author_list[-1].name + get["ts"](author_insti_list)
+
+    # Bold if presenting author
+    if "*" in author_list[-1].name:
+        author_string = author_string + get[presenting_author_attribute](author_list[-1].name).replace("*", "") + get[
+            "ts"](author_insti_list) + ", "
+    else:
+        author_string = author_string + author_list[-1].name + get["ts"](author_insti_list)
 
     institute_string = ""
     for i in range(len(institute_name_list) - 1):
