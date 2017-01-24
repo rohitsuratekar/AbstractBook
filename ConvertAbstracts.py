@@ -6,6 +6,7 @@ from OutputModel import get_output_format
 folderNames = ["Abstracts/", "AbstractsSpeakers/"]
 saveFileNames = ["all_abstracts.tex", "all_speakers.tex"]
 
+
 for nameIndex in range(len(folderNames)):
 
     abstractFolder = folderNames[nameIndex]

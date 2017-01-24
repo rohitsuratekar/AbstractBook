@@ -1,3 +1,0 @@
-{Title}
-{Author1 [NCBS]}
-{Abstract}

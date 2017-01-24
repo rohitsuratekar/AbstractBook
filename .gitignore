@@ -4,3 +4,14 @@ __pycache__/
 *.pdf
 *.out
 *.gz
+AbstractsSpeakers/
+Abstracts/
+*.toc
+*.ilg
+*.idx
+*.ind
+images/
+sections/
+CCCP2016_schedule_and_abstracts.tex
+all_speakers.tex
+all_abstracts.tex

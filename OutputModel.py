@@ -29,6 +29,7 @@ author_attributes = []
 affiliation_attributes = ["sc", "i"]
 abstract_attribute = ["in"]
 presenting_author_attribute = "b"
+ignore_single_institute = True
 
 
 def get_output_format(abstract):
@@ -58,10 +59,17 @@ def get_output_format(abstract):
         author_insti_list += str(auth.indexes[-1] + 1)
         # Bold if presenting author
         if "*" in auth.name:
-            author_string = author_string + get[presenting_author_attribute](auth.name).replace("*", "") + get["ts"](
-                author_insti_list) + ", "
+            if ignore_single_institute & len(institute_name_list) == 1:
+                author_string = author_string + get[presenting_author_attribute](auth.name).replace("*", "") + ", "
+            else:
+                author_string = author_string + get[presenting_author_attribute](auth.name).replace("*", "") + get[
+                    "ts"](author_insti_list) + ", "
+
         else:
-            author_string = author_string + auth.name + get["ts"](author_insti_list) + ", "
+            if ignore_single_institute & len(institute_name_list) == 1:
+                author_string = author_string + auth.name + ", "
+            else:
+                author_string = author_string + auth.name + get["ts"](author_insti_list) + ", "
 
     # For last author
 
@@ -73,17 +81,30 @@ def get_output_format(abstract):
 
     # Bold if presenting author
     if "*" in author_list[-1].name:
-        author_string = author_string + get[presenting_author_attribute](author_list[-1].name).replace("*", "") + get[
-            "ts"](author_insti_list) + ", "
+        if ignore_single_institute & len(institute_name_list) == 1:
+            author_string = author_string + get[presenting_author_attribute](author_list[-1].name).replace("*",
+                                                                                                           "") + ", "
+        else:
+            author_string = author_string + get[presenting_author_attribute](author_list[-1].name).replace("*", "") + \
+                            get["ts"](author_insti_list) + ", "
     else:
-        author_string = author_string + author_list[-1].name + get["ts"](author_insti_list)
+        if ignore_single_institute & len(institute_name_list) == 1:
+            author_string = author_string + author_list[-1].name
+        else:
+            author_string = author_string + author_list[-1].name + get["ts"](author_insti_list)
 
     institute_string = ""
     for i in range(len(institute_name_list) - 1):
-        institute_string = institute_string + get["ts"](str(i + 1)) + institute_name_list[i] + r"\linebreak"
+        if ignore_single_institute & len(institute_name_list) == 1:
+            institute_string = institute_string + institute_name_list[i] + r"\linebreak "
+        else:
+            institute_string = institute_string + get["ts"](str(i + 1)) + institute_name_list[i] + r"\linebreak "
 
-    institute_string = institute_string + get["ts"](str(len(institute_name_list))) + \
-                       institute_name_list[-1]
+    if ignore_single_institute & len(institute_name_list) == 1:
+        institute_string = institute_string + institute_name_list[-1]
+    else:
+        institute_string = institute_string + get["ts"](str(len(institute_name_list))) + \
+                           institute_name_list[-1]
 
     title_string = abstract.title
     abstract_string = abstract.abstract

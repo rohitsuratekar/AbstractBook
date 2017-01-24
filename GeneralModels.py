@@ -2,12 +2,10 @@ class Author:
     """Author name and its affiliation"""
     name = "Author Name"
     affiliation = ["Unknown"]
-    presenting_author = False
 
     def __init__(self, name=None, affiliation=None, presenting=False):
         self.name = name
         self.affiliation = list(affiliation)
-        self.presenting_author = presenting
 
 
 class Abstract:

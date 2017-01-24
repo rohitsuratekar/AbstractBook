@@ -1,7 +1,0 @@
-{Title}
-{SecondfileAuth1 [Affiliation]}
-{Author Name [Affiliation2]}
-{Author2 [Affiliation2]}
-{First Last [Affiliation]}
-{Author2}
-{Abstract}

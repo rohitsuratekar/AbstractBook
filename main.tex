@@ -1,20 +1,43 @@
-\documentclass{book}
-\usepackage[pdftex,
+\documentclass[a4paper,11pt,oneside]{book}% note: a4paper - not a4 If you don't use, it will leave margin for printing
+\usepackage[hmarginratio=1:1]{geometry}% equal left and right margins
+\usepackage[linktocpage, pdftex,
 pdfauthor={Rohit Suratekar},
 pdftitle={Conference Schedule}]{hyperref} %References and hyperlinks
-\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
 \usepackage{fixltx2e} %Removes in paragraph warnings
-\usepackage[utf8]{inputenc}
 \usepackage{standalone} % load only in the main file
+\usepackage{graphicx}%Graphics related
+\usepackage{titlesec} %To customize titles
+\usepackage{fancyhdr} %For header
+\usepackage{microtype} %For justify text in block
+\usepackage{caption, tabularx} %Tables related
+\pagestyle{fancy}
+\fancypagestyle{MyStyle}{%
+    \fancyhead{} %Clean headers
+    \fancyhead[RO]{\leftmark}
+    \fancyhead[LE]{\leftmark}
+    \renewcommand{\chaptermark}[1]{\markboth{\thechapter. {\slshape{##1}}}{}}
+}
+\usepackage{tocloft} %Need this for proper section no space
+\setlength{\cftchapnumwidth}{3em}
 
-\newcommand{\RAuthor}[2]{}
-
-\newcommand{\RAbstract}[3]{%
-#1 %
-\\ {\small \textit{#2}}\\%
-#3
- }
+\titleformat{\chapter}[display]
+{\normalfont\huge\bfseries}{}{0pt}{\Huge}
+\titlespacing*{\chapter} {0pt}{20pt}{40pt}
 \begin{document}
+\frontmatter
+\input{sections/front_page}
+\input{sections/cover_page}
+\tableofcontents
+\mainmatter
+\pagestyle{MyStyle}
+\renewcommand{\thesection}{\arabic{section}}
+\input{sections/useful_info}
+\chapter{Schedule}
+\chapter{Speaker Abstracts}
+\renewcommand{\thesection}{\arabic{section}}
+\input{all_speakers}
+\chapter{Poster Abstracts}
+\renewcommand{\thesection}{\arabic{section}}
 \input{all_abstracts}
 \end{document}
 

@@ -1,4 +1,0 @@
-{Title}
-{SecondfileAuth1 [Affiliation]}
-{Author E - Random. Et [Affiliation2, Institute name, Country, 309282]}
-{Abstract}
