@@ -21,12 +21,14 @@ class Abstract:
     has_references = False
     references = []
     unique_institutes = []
+    first_author = ""
 
     def __init__(self, title=None, author_list=None, abstract=None):
         self.title = title
         self.authors = list(author_list)
         self.abstract = abstract
         self.references = []
+        self.first_author = author_list[0].name
         # Check if all authors are from same university
         unique_institutes_dic = {}
         for a in author_list:

@@ -32,6 +32,8 @@ for file_index in range(len(folder_list)):
             # Create abstract object
             all_abstracts.append(Abstract(format_string(elements[0]), author_list, format_string(elements[-1])))
 
+    # Sort it alphabetically
+    all_abstracts.sort(key=lambda x: x.first_author)
     with open(save_file_name, 'w') as f:
         for a in all_abstracts:
             print(get_output_format(a), file=f)

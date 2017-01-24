@@ -10,6 +10,7 @@ pdftitle={Conference Schedule}]{hyperref} %References and hyperlinks
 \usepackage{fancyhdr} %For header
 \usepackage{microtype} %For justify text in block
 \usepackage{caption, tabularx} %Tables related
+
 \pagestyle{fancy}
 \fancypagestyle{MyStyle}{%
     \fancyhead{} %Clean headers
@@ -20,6 +21,22 @@ pdftitle={Conference Schedule}]{hyperref} %References and hyperlinks
 \usepackage{tocloft} %Need this for proper section no space
 \setlength{\cftchapnumwidth}{3em}
 
+% Formatting underline
+\setcounter{errorcontextlines}{999}
+\usepackage{soul} % For proper underline
+\makeatletter
+\newcommand*{\whiten}[1]{\llap{\textcolor{white}{{\the\SOUL@token}}\hspace{#1pt}}}
+\DeclareRobustCommand*\myul{%
+	\def\SOUL@everyspace{\underline{\space}\kern\z@}
+	\def\SOUL@everytoken{%
+		\setbox0=\hbox{\the\SOUL@token}%
+		\ifdim\dp0>\z@
+		\the\SOUL@token
+		\else
+		\underline{\the\SOUL@token}%
+		\fi}
+	\SOUL@}
+\makeatother
 \titleformat{\chapter}[display]
 {\normalfont\huge\bfseries}{}{0pt}{\Huge}
 \titlespacing*{\chapter} {0pt}{20pt}{40pt}

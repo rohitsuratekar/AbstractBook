@@ -4,7 +4,7 @@ title_attributes = ["se"]
 author_attributes = []
 affiliation_attributes = ["sc", "i"]
 abstract_attribute = ["in"]
-presenting_author_attribute = "b"
+presenting_author_attribute = "mu"
 reference_attribute = ["in"]
 
 
@@ -182,10 +182,20 @@ def superscript(text):
     return r"\textsuperscript{%s}" % text
 
 
+def underline(text):
+    return r"\underline{%s}" % text
+
+
+# This is custom definition
+def my_underline(text):
+    return r"\myul{%s}" % text
+
+
 get = {
     "b": bold,
     "i": italics,
     "s": small,
+    "u": underline,
     "f": footnotesize,
     "sc": scriptsize,
     "t": tiny,
@@ -200,5 +210,6 @@ get = {
     "bqq": extra_tab_before,
     "in": indent,
     "se": section,
-    "ts": superscript
+    "ts": superscript,
+    "mu": my_underline
 }
