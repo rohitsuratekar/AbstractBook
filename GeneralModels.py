@@ -28,7 +28,8 @@ class Abstract:
         self.authors = list(author_list)
         self.abstract = abstract
         self.references = []
-        self.first_author = author_list[0].name
+        temp_author = author_list[0].name.split(" ")
+        self.first_author = temp_author[-1]
         # Check if all authors are from same university
         unique_institutes_dic = {}
         for a in author_list:
